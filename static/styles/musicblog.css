@@ -1,0 +1,57 @@
+.blogpost-preview{
+    background-color: white;
+    padding: 10px;
+    margin-bottom: 20px;
+    border-radius: 10px;
+}
+
+.review-preview{
+    background-color: white;
+    padding: 10px;
+    margin-bottom: 20px;
+    border-radius: 10px;
+}
+
+.blog-background{
+    background-color: RGBA(200, 214, 185, 1);
+}
+
+.review-background{
+    background-color: white;
+}
+
+.footer-background{
+    background-color: black;
+}
+
+.archive-table{
+    background-color: white;
+    border-radius: 10px;
+}
+
+.site-footer{
+    color: white;
+    background-color: black;
+}
+
+.blogpost-author-date{
+    margin: 0;
+    margin-top: 20px;
+    font-style: italic;
+}
+
+.text-white{
+    color: white;
+}
+
+.text-center{
+    text-align: center;
+}
+
+.older-posts-button{
+    margin-bottom: 17px;
+}
+
+.review-bottom{
+    margin-bottom:17px;
+}

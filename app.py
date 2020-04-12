@@ -90,5 +90,10 @@ def upload():
         return filename
     return render_template('upload.html')
 
+@app.route('/archive')
+def archive():
+    reviews = Review.query.order_by(Review.date_posted.desc()).all()
+    return render_template('archive.html', reviews=reviews)
+
 if __name__ == '__main__':
     app.run(debug=True)

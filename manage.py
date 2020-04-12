@@ -33,13 +33,11 @@ class Review(db.Model):
     artist = db.Column(db.String(200))
     release_title = db.Column(db.String(200))
     art_filename = db.Column(db.String(500))
-    # review archive
-    # tags
     # login
-    # templating
-    # edit review
+    # edit review/post
     # pagination
-    # searching and sorting
+    # tags
+    # searching and sorting (archive and maybe reviews+blog)
 
 if __name__ == '__main__':
     manager.run()

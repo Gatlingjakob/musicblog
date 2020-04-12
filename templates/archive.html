@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+{% block title %}Index{% endblock %}
+{% block head %}
+    {{ super() }}
+{% endblock %}
+
+{% block content %}
+<!-- Page Header -->
+<header class="masthead" style="background-image: url(' {{ url_for('static', filename='home-bg.jpg') }} ' )">
+  <div class="overlay"></div>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-md-10 mx-auto">
+        <div class="site-heading">
+          <h1>Archive</h1>
+          <span class="subheading">Browse the reviews</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- Main Content -->
+<div class="container">
+  <div class="row">
+    <div class="col-lg-8 col-md-10 mx-auto">
+      <div class="post-preview">
+        <table class="table table-striped table-bordered archive-table">
+            <thead>
+              <tr>
+                <th>Title</th>
+                <th>Artist</th>
+                <th>Score</th>
+                <th>Author</th>
+                <th>Date Posted</th>
+                <th>Thumbnail</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for review in reviews %}
+              {% set name = 'images/' + review.art_filename|string %}
+              <tr>
+                <td>{{ review.release_title }}</td>
+                <td>{{ review.artist }}</td>
+                <td>{{ review.score }}</td>
+                <td>{{ review.author }}</td>
+                <td>{{ review.date_posted.strftime('%B %d, %Y') }}</td>
+                <td><img src="static/images/{{ review.art_filename }}" width="100" height="100" /></td>
+              </tr>
+              {% endfor %}
+            </tbody>  
+          </table>
+      </div>
+      <hr>
+
+      <!-- Pager -->
+      <div class="clearfix">
+        <a class="btn btn-primary float-right older-posts-button" href="#">Older Posts &rarr;</a>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
