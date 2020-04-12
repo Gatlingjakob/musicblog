@@ -1,33 +1,24 @@
 from flask import Flask, render_template, request, redirect, url_for
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
+from flask_migrate import Migrate, MigrateCommand
+from flask_script import Manager
+from manage import Blogpost, Review, User, Role, user_datastore
+from flask_uploads import UploadSet, configure_uploads, IMAGES
+from flask_security import Security, SQLAlchemyUserDatastore, login_required
+from flask_security.utils import hash_password
 
 app = Flask(__name__)
 
+photos = UploadSet('photos', IMAGES)
+
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:////Users/jakobhoy/Desktop/Development/Python/musicblog/musicblog.db'
+app.config['UPLOADED_PHOTOS_DEST'] = 'static/images'
+app.config['SECRET_KEY'] = 'thisisasecret'
+
+configure_uploads(app, photos)
 
 db = SQLAlchemy(app)
-
-class Blogpost(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    title = db.Column(db.String(50))
-    subtitle = db.Column(db.String(50))
-    author = db.Column(db.String(20))
-    date_posted = db.Column(db.DateTime)
-    content = db.Column(db.Text)
-
-class Review(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    title = db.Column(db.String(50))
-    subtitle = db.Column(db.String(50))
-    author = db.Column(db.String(20))
-    date_posted = db.Column(db.DateTime)
-    content = db.Column(db.Text)
-    score = db.Column(db.String(50))
-    # tags
-    # artist
-    # release title
-    # album art
 
 @app.route('/')
 def index():
@@ -82,17 +73,45 @@ def addreview():
 
 @app.route('/createreview', methods=['POST'])
 def createreview():
-    title = request.form['title']
     subtitle = request.form['subtitle']
     author = request.form['author']
     content = request.form['content']
     score = request.form['score']
-
-    review = Review(title=title, subtitle=subtitle, author=author, content=content, date_posted=datetime.now(), score=score)
+    artist = request.form['artist']
+    release_title = request.form['release_title']
+    art_filename = request.form['art_filename']
+    
+    title= artist + ' - ' + release_title
+    review = Review(title=title, subtitle=subtitle, author=author, content=content, date_posted=datetime.now(), score=score, art_filename=art_filename, artist=artist, release_title=release_title)
 
     db.session.add(review)
     db.session.commit()
     return redirect(url_for('reviews'))
+
+@app.route('/upload', methods=['GET', 'POST'])
+def upload():
+    if request.method == 'POST' and 'photo' in request.files:
+        filename = photos.save(request.files['photo'])
+        return filename
+    return render_template('upload.html')
+
+@app.route('/register', methods=['POST', 'GET'])
+def register():
+    if request.method == 'POST':
+        user_datastore.create_user(
+            email=request.form.get('email'),
+            password=hash_password(request.form.get('password'))
+        )
+        db.session.commit()
+
+        return redirect(url_for('profile'))
+
+    return render_template('register.html')
+
+@app.route('/profile')
+@login_required
+def profile():
+    return render_template('profile.html')
 
 if __name__ == '__main__':
     app.run(debug=True)

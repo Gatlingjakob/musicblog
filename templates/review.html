@@ -59,7 +59,8 @@
   </nav>
 
   <!-- Page Header -->
-  <header class="masthead" style="background-image: url(' {{ url_for('static', filename='post-bg.jpg') }} ' )">
+  {% set name = 'images/' + review.art_filename|string %}
+  <header class="masthead" style="background-image: url(' {{ url_for('static', filename=name) }} ' )">
     <div class="overlay"></div>
     <div class="container">
       <div class="row">
@@ -81,10 +82,9 @@
     <div class="container">
       <div class="row">
         <div class="col-lg-8 col-md-10 mx-auto">
-          {{ post.content|safe }}
+          {{ review.content|safe }}
           <hr>
           <h2>Score: {{ review.score }}/10</h2>
-          
         </div>
       </div>
     </div>

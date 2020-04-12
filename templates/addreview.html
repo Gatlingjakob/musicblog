@@ -80,8 +80,13 @@
         <form name="addForm" id="addForm" method="POST" action="{{ url_for('createreview') }}" novalidate>
           <div class="control-group">
             <div class="form-group floating-label-form-group controls">
-              <label>Title</label>
-              <input type="text" class="form-control" placeholder="Title" name="title" id="title" required data-validation-required-message="Please enter a title.">
+              <label>Artist</label>
+              <input type="text" class="form-control" placeholder="Artist" name="artist" id="artist" required data-validation-required-message="Please enter an artist name.">
+              <p class="help-block text-danger"></p>
+            </div>
+            <div class="form-group floating-label-form-group controls">
+              <label>Release Title</label>
+              <input type="text" class="form-control" placeholder="Release Title" name="release_title" id="release_title" required data-validation-required-message="Please enter a title.">
               <p class="help-block text-danger"></p>
             </div>
           </div>
@@ -110,6 +115,13 @@
             <div class="form-group floating-label-form-group controls">
               <label>Review Content</label>
               <textarea rows="5" class="form-control" placeholder="Blog Content" name="content" id="content" required data-validation-required-message="HTML Content goes here."></textarea>
+              <p class="help-block text-danger"></p>
+            </div>
+          </div>
+          <div class="control-group">
+            <div class="form-group col-xs-12 floating-label-form-group controls">
+              <label>Art Filename</label>
+              <input type="text" class="form-control" placeholder="Art Filename" name="art_filename" id="art_filename" required data-validation-required-message="Name of the art file">
               <p class="help-block text-danger"></p>
             </div>
           </div>

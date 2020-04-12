@@ -87,6 +87,7 @@
               {{ post.subtitle }}
             </h3>
           </a>
+          {{post.content | safe}}
           <p class="post-meta">Posted by {{ post.author }} on {{ post.date_posted.strftime('%B %d, %Y') }}</p>
         </div>
         {% endfor %}
