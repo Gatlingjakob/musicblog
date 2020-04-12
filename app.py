@@ -3,10 +3,8 @@ from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
 from flask_migrate import Migrate, MigrateCommand
 from flask_script import Manager
-from manage import Blogpost, Review, User, Role, user_datastore
+from manage import Blogpost, Review
 from flask_uploads import UploadSet, configure_uploads, IMAGES
-from flask_security import Security, SQLAlchemyUserDatastore, login_required
-from flask_security.utils import hash_password
 
 app = Flask(__name__)
 
@@ -14,10 +12,7 @@ photos = UploadSet('photos', IMAGES)
 
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:////Users/jakobhoy/Desktop/Development/Python/musicblog/musicblog.db'
 app.config['UPLOADED_PHOTOS_DEST'] = 'static/images'
-app.config['SECRET_KEY'] = 'thisisasecret'
-
 configure_uploads(app, photos)
-
 db = SQLAlchemy(app)
 
 @app.route('/')
@@ -94,24 +89,6 @@ def upload():
         filename = photos.save(request.files['photo'])
         return filename
     return render_template('upload.html')
-
-@app.route('/register', methods=['POST', 'GET'])
-def register():
-    if request.method == 'POST':
-        user_datastore.create_user(
-            email=request.form.get('email'),
-            password=hash_password(request.form.get('password'))
-        )
-        db.session.commit()
-
-        return redirect(url_for('profile'))
-
-    return render_template('register.html')
-
-@app.route('/profile')
-@login_required
-def profile():
-    return render_template('profile.html')
 
 if __name__ == '__main__':
     app.run(debug=True)
