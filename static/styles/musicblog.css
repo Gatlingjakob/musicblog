@@ -1,14 +1,14 @@
 .blogpost-preview{
     background-color: white;
     padding: 10px;
-    margin-bottom: 20px;
+    margin-bottom: 30px;
     border-radius: 10px;
 }
 
 .review-preview{
     background-color: white;
     padding: 10px;
-    margin-bottom: 20px;
+    margin-bottom: 30px;
     border-radius: 10px;
 }
 
@@ -32,6 +32,10 @@
 .site-footer{
     color: white;
     background-color: black;
+}
+
+.blogpost-subtitle{
+    margin-top: 10px;
 }
 
 .blogpost-author-date{

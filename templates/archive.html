@@ -6,7 +6,7 @@
 
 {% block content %}
 <!-- Page Header -->
-<header class="masthead" style="background-image: url(' {{ url_for('static', filename='home-bg.jpg') }} ' )">
+<header class="masthead" style="background-image: url(' {{ url_for('static', filename='archive.jpeg') }} ' )">
   <div class="overlay"></div>
   <div class="container">
     <div class="row">
@@ -42,7 +42,7 @@
               <tr>
                 <td>{{ review.release_title }}</td>
                 <td>{{ review.artist }}</td>
-                <td>{{ review.score }}</td>
+                <td>{{ review.score }}/10</td>
                 <td>{{ review.author }}</td>
                 <td>{{ review.date_posted.strftime('%B %d, %Y') }}</td>
                 <td><img src="static/images/{{ review.art_filename }}" width="100" height="100" /></td>

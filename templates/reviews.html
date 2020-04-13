@@ -6,7 +6,7 @@
 
 {% block content %}
 <!-- Page Header -->
-<header class="masthead" style="background-image: url(' {{ url_for('static', filename='home-bg.jpg') }} ' )">
+<header class="masthead" style="background-image: url(' {{ url_for('static', filename='reviewbackground3.jpeg') }} ' )">
   <div class="overlay"></div>
   <div class="container">
     <div class="row">
@@ -32,7 +32,7 @@
           </h2>
           {% set name = 'images/' + review.art_filename|string %}
           <img src="static/images/{{ review.art_filename }}" width="250" height="250" />
-          <h3 class="post-subtitle">
+          <h3 class="post-subtitle blogpost-subtitle">
             {{ review.subtitle }}
           </h3>
           <h3 class="post-subtitle">

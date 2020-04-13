@@ -1,4 +1,4 @@
-{% extends "base.html" %}
+{% extends "adminbase.html" %}
 {% block title %}Index{% endblock %}
 {% block head %}
     {{ super() }}
@@ -24,7 +24,18 @@
 <div class="container">
   <div class="row">
     <div class="col-lg-8 col-md-10 mx-auto">
+      <form method=POST enctype=multipart/form-data action="{{ url_for('upload') }}">
+        <input type=file name=photo>
+        <input type="submit">
+    </form>
       <form name="addForm" id="addForm" method="POST" action="{{ url_for('createreview') }}" novalidate>
+        <div class="control-group">
+          <div class="form-group col-xs-12 floating-label-form-group controls">
+            <label>Art Filename</label>
+            <input type="text" class="form-control" placeholder="Art Filename" name="art_filename" id="art_filename" value="{{filename}}" required data-validation-required-message="Name of the art file">
+            <p class="help-block text-danger"></p>
+          </div>
+        </div>
         <div class="control-group">
           <div class="form-group floating-label-form-group controls">
             <label>Artist</label>
@@ -62,13 +73,6 @@
           <div class="form-group floating-label-form-group controls">
             <label>Review Content</label>
             <textarea rows="5" class="form-control" placeholder="Blog Content" name="content" id="content" required data-validation-required-message="HTML Content goes here."></textarea>
-            <p class="help-block text-danger"></p>
-          </div>
-        </div>
-        <div class="control-group">
-          <div class="form-group col-xs-12 floating-label-form-group controls">
-            <label>Art Filename</label>
-            <input type="text" class="form-control" placeholder="Art Filename" name="art_filename" id="art_filename" required data-validation-required-message="Name of the art file">
             <p class="help-block text-danger"></p>
           </div>
         </div>

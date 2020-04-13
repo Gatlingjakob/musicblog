@@ -1,4 +1,4 @@
-{% extends "base.html" %}
+{% extends "adminbase.html" %}
 {% block title %}Index{% endblock %}
 {% block head %}
     {{ super() }}
@@ -48,7 +48,7 @@
         </div>
         <div class="control-group">
           <div class="form-group floating-label-form-group controls">
-            <label>Blog Contect</label>
+            <label>Blog Content</label>
             <textarea rows="5" class="form-control" placeholder="Blog Content" name="content" id="content" required data-validation-required-message="HTML Content goes here."></textarea>
             <p class="help-block text-danger"></p>
           </div>

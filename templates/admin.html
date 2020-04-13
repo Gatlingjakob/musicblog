@@ -1,0 +1,24 @@
+{% extends "adminbase.html" %}
+{% block title %}Index{% endblock %}
+{% block head %}
+    {{ super() }}
+{% endblock %}
+
+{% block content %}
+<!-- Page Header -->
+<header class="masthead" style="background-image: url(' {{ url_for('static', filename='contact-bg.jpg') }} ' )">
+  <div class="overlay"></div>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-md-10 mx-auto">
+        <div class="page-heading">
+          <h1>Teacher's Lounge</h1>
+          <span class="subheading">You shouldn't be here</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+
+{% endblock %}
