@@ -6,6 +6,7 @@ from flask_script import Manager
 from manage import Blogpost, Review, User
 from flask_uploads import UploadSet, configure_uploads, IMAGES
 from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user, current_user
+from werkzeug.security import generate_password_hash, check_password_hash
 
 app = Flask(__name__)
 
@@ -31,7 +32,7 @@ def login():
     username = request.form['username']
     password = request.form['password']
 
-    if user.username == username and user.password == password:
+    if user.username == username and check_password_hash(user.password, password):
         login_user(user)
         return redirect(url_for('admin'))  
 

@@ -40,6 +40,7 @@ class Review(db.Model):
     artist = db.Column(db.String(200))
     release_title = db.Column(db.String(200))
     art_filename = db.Column(db.String(500))
+    # password hash
     # extra picture on review header
     # album animation background on review page
     # Read article link on cards
