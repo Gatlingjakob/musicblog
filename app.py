@@ -39,13 +39,6 @@ def login():
 
     return redirect(url_for('adminlogin'))    
 
-@app.route('/userauthenticated')
-def userauthenticated():
-    if current_user.is_authenticated:
-         return True
-    else:
-         return False
-
 @app.route('/adminlogin')
 def adminlogin():
     return render_template('adminlogin.html')
