@@ -7,14 +7,15 @@ from manage import Blogpost, Review, User
 from flask_uploads import UploadSet, configure_uploads, IMAGES
 from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user, current_user
 from werkzeug.security import generate_password_hash, check_password_hash
+from configvalues import config_values
 
 app = Flask(__name__)
 
 photos = UploadSet('photos', IMAGES)
 
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:////Users/jakobhoy/Desktop/Development/Python/musicblog/musicblog.db'
-app.config['UPLOADED_PHOTOS_DEST'] = 'static/images'
-app.config['SECRET_KEY'] = 'umamibanana'
+app.config['SQLALCHEMY_DATABASE_URI'] = config_values['SQLALCHEMY_DATABASE_URI']
+app.config['UPLOADED_PHOTOS_DEST'] = config_values['UPLOADED_PHOTOS_DEST']
+app.config['SECRET_KEY'] = config_values['SECRET_KEY']
 configure_uploads(app, photos)
 
 db = SQLAlchemy(app)

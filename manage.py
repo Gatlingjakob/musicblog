@@ -3,10 +3,10 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_script import Manager
 from flask_migrate import Migrate, MigrateCommand
 from flask_login import UserMixin
-
+from configvalues import config_values
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:////Users/jakobhoy/Desktop/Development/Python/musicblog/musicblog.db'
+app.config['SQLALCHEMY_DATABASE_URI'] = config_values['SQLALCHEMY_DATABASE_URI']
 
 db = SQLAlchemy(app)
 migrate = Migrate(app, db)
