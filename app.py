@@ -57,13 +57,8 @@ def admin():
 
 @app.route('/')
 def index():
-    posts = Blogpost.query.order_by(Blogpost.date_posted.desc()).all()
+    posts = Blogpost.query.order_by(Blogpost.date_posted.desc()).filter(Blogpost.is_published==1).all()
     return render_template('index.html', posts=posts)
-
-@app.route('/reviews')
-def reviews():
-    reviews = Review.query.order_by(Review.date_posted.desc()).all()
-    return render_template('reviews.html', reviews=reviews)
 
 @app.route('/about')
 def about():
@@ -98,7 +93,7 @@ def addpost():
     author = request.form['author']
     content = request.form['content']
 
-    post = Blogpost(title=title, subtitle=subtitle, author=author, content=content, date_posted=datetime.now())
+    post = Blogpost(title=title, subtitle=subtitle, author=author, content=content, date_posted=datetime.now(), is_published=1)
 
     db.session.add(post)
     db.session.commit()
@@ -121,11 +116,11 @@ def createreview():
     art_filename = request.form['art_filename']
     
     title= artist + ' - ' + release_title
-    review = Review(title=title, subtitle=subtitle, author=author, content=content, date_posted=datetime.now(), score=score, art_filename=art_filename, artist=artist, release_title=release_title)
+    review = Review(title=title, subtitle=subtitle, author=author, content=content, date_posted=datetime.now(), score=score, art_filename=art_filename, artist=artist, release_title=release_title, is_published=1)
 
     db.session.add(review)
     db.session.commit()
-    return redirect(url_for('reviews'))
+    return redirect(url_for('musicreviews',page=1))
 
 @app.route('/upload', methods=['GET', 'POST'])
 @login_required
@@ -139,6 +134,12 @@ def upload():
 def archive():
     reviews = Review.query.order_by(Review.date_posted.desc()).all()
     return render_template('archive.html', reviews=reviews)
+
+@app.route('/musicreviews/<int:page>',methods=['GET'])
+def musicreviews(page=1):
+    per_page = 5
+    posts = Review.query.order_by(Review.date_posted.desc()).filter(Review.is_published==1).paginate(page,per_page,error_out=False)
+    return render_template('musicreviews.html',posts=posts)
 
 if __name__ == '__main__':
     app.run(debug=True)

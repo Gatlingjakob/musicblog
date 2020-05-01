@@ -1,0 +1,75 @@
+{% extends "base.html" %}
+{% block title %}Index{% endblock %}
+{% block head %}
+    {{ super() }}
+{% endblock %}
+
+{% block content %}
+<!-- Page Header -->
+<header class="masthead" style="background-image: url(' {{ url_for('static', filename='reviewbackground3.jpeg') }} ' )">
+  <div class="overlay"></div>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-md-10 mx-auto">
+        <div class="site-heading">
+          <h1>Reviews</h1>
+          <span class="subheading">My thoughts on albums, mixtapes, EP's and more!</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- Main Content -->
+<div class="container">
+  <div class="row">
+    <div class="col-lg-8 col-md-10 mx-auto">
+      {% for post in posts.items %}
+      <div class="review-preview">
+        <a href="{{ url_for('review', review_id=post.id) }}">
+          <h2 class="post-title">
+            {{ post.title }}
+          </h2>
+          <img src="/static/images/{{ post.art_filename }}" width="250" height="250" />
+          <h3 class="post-subtitle blogpost-subtitle">
+            {{ post.subtitle }}
+          </h3>
+          <h3 class="post-subtitle">
+              {{ post.score }}/10
+            </h3>
+        </a>
+        <p class="blogpost-author-date">Posted by {{ post.author }} on {{ post.date_posted.strftime('%B %d, %Y') }}</p>
+      </div>
+      {% endfor %}
+      <hr>
+
+      <!-- {% for post in posts.items %}
+<div class="blogpost-preview">
+    <a href="{{ url_for('review', review_id=post.id) }}">
+      <h2 class="blogpost-title">
+        {{ post.title }}
+      </h2>
+      {% set name = 'images/' + post.art_filename|string %}
+          <img src="static/images/{{ post.art_filename }}" width="250" height="250" />
+      <h4 class="post-subtitle">
+        {{ post.subtitle }}
+      </h4>
+    </a>
+    {{post.content | safe}}
+    <p class="blogpost-author-date">Posted by {{ post.author }} on {{ post.date_posted.strftime('%B %d, %Y') }}</p>
+  </div>
+{% endfor %} -->
+{% if posts.has_prev %}<div class="clearfix">
+  <a class="btn btn-primary float-right older-posts-button" href="{{ url_for('musicreviews', page=posts.prev_num) }}">&larr; Newer Posts</a>
+</div>{% endif %}
+{% if posts.has_next %}<div class="clearfix">
+  <a class="btn btn-primary float-right older-posts-button" href="{{ url_for('musicreviews', page=posts.next_num) }}">Older Posts &rarr;</a>
+</div>{% endif %}
+      <!-- Pager -->
+      <!-- <div class="clearfix">
+        <a class="btn btn-primary float-right older-posts-button" href="#">Older Posts &rarr;</a>
+      </div> -->
+    </div>
+  </div>
+</div>
+{% endblock %}

@@ -28,6 +28,7 @@ class Blogpost(db.Model):
     author = db.Column(db.String(50))
     date_posted = db.Column(db.DateTime)
     content = db.Column(db.Text)
+    is_published = db.Column(db.Integer)
 
 class Review(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -40,14 +41,18 @@ class Review(db.Model):
     artist = db.Column(db.String(200))
     release_title = db.Column(db.String(200))
     art_filename = db.Column(db.String(500))
-    # album animation background on review page
+    is_published = db.Column(db.Integer)
+    # HIGH PRIO
+    # genre
+    # page numbers
     # Read article link on cards
-    # post-header background 
+    # post-header background
     # make automatic blogpost whenever a review is released
     # edit review/post
-    # pagination
-    # tags
     # searching and sorting (archive and maybe reviews+blog)
+    # NICE TO HAVE
+    # album animation background on review page
+    # tags
     # about section with links to my music and art (maybe integrated music player and photo album)
     
 
