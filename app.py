@@ -132,7 +132,7 @@ def upload():
 
 @app.route('/archive')
 def archive():
-    reviews = Review.query.order_by(Review.date_posted.desc()).all()
+    reviews = Review.query.order_by(Review.date_posted.desc()).filter(Review.is_published==1).all()
     return render_template('archive.html', reviews=reviews)
 
 @app.route('/musicreviews/<int:page>',methods=['GET'])
