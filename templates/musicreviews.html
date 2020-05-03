@@ -35,9 +35,10 @@
             {{ post.subtitle }}
           </h3>
           <h3 class="post-subtitle">
-              {{ post.score }}/10
+              Score: {{ post.score }}/10
             </h3>
         </a>
+        <p class="blogpost-genres">Genres: {{ post.genres }}</p>
         <p class="blogpost-author-date">Posted by {{ post.author }} on {{ post.date_posted.strftime('%B %d, %Y') }}</p>
       </div>
       {% endfor %}

@@ -42,14 +42,15 @@ class Review(db.Model):
     release_title = db.Column(db.String(200))
     art_filename = db.Column(db.String(500))
     is_published = db.Column(db.Integer)
+    genres = db.Column(db.String(500))
     # HIGH PRIO
-    # genre
     # page numbers
-    # Read article link on cards
+    # Read article link on cards and wordwrap
     # post-header background
-    # make automatic blogpost whenever a review is released
+    # Latest reviews on frontpage
     # edit review/post
     # searching and sorting (archive and maybe reviews+blog)
+    
     # NICE TO HAVE
     # album animation background on review page
     # tags

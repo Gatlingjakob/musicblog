@@ -24,7 +24,7 @@
   <div class="container">
     <div class="row">
       <div class="col-lg-8 col-md-10 mx-auto">
-        {% for post in posts %}
+        {% for post in posts.items %}
         <div class="blogpost-preview">
           <a href="{{ url_for('post', post_id=post.id) }}">
             <h2 class="blogpost-title">
@@ -40,9 +40,15 @@
         {% endfor %}
         <hr>
         <!-- Pager -->
-        <div class="clearfix">
+        {% if posts.has_prev %}<div class="clearfix">
+          <a class="btn btn-primary float-right older-posts-button" href="{{ url_for('index', page=posts.prev_num) }}">&larr; Newer Posts</a>
+        </div>{% endif %}
+        {% if posts.has_next %}<div class="clearfix">
+          <a class="btn btn-primary float-right older-posts-button" href="{{ url_for('index', page=posts.next_num) }}">Older Posts &rarr;</a>
+        </div>{% endif %}
+        <!-- <div class="clearfix">
           <a class="btn btn-primary float-right older-posts-button" href="#">Older Posts &rarr;</a>
-        </div>
+        </div> -->
       </div>
     </div>
   </div>

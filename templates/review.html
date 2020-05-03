@@ -18,6 +18,7 @@
           <h1>{{ review.title }}</h1>
           <img src="{{ url_for('static', filename=name) }}" width="250" height="250" />
           <h2 class="subheading">{{ review.subtitle }}</h2>
+          <span class="meta review-genres">Genres: {{review.genres}}</span>
           <span class="meta">Posted by
             {{ review.author }}
             on {{ review.date_posted.strftime('%B %d, %Y') }}</span>

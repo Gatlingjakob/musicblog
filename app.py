@@ -48,16 +48,17 @@ def adminlogin():
 def adminlogout():
     user = User.query.filter_by(username='Gatlingjakob').first()
     logout_user()
-    return redirect(url_for('index'), code=302)
+    return redirect(url_for('index', page=1), code=302)
 
 @app.route('/admin')
 @login_required
 def admin():
     return render_template('add.html')
 
-@app.route('/')
-def index():
-    posts = Blogpost.query.order_by(Blogpost.date_posted.desc()).filter(Blogpost.is_published==1).all()
+@app.route('/<int:page>', methods=['GET'])
+def index(page=1):
+    per_page = 5
+    posts = Blogpost.query.order_by(Blogpost.date_posted.desc()).filter(Blogpost.is_published==1).paginate(page,per_page,error_out=False)
     return render_template('index.html', posts=posts)
 
 @app.route('/about')
@@ -97,7 +98,7 @@ def addpost():
 
     db.session.add(post)
     db.session.commit()
-    return redirect(url_for('index'))
+    return redirect(url_for('index', page=1))
 
 @app.route('/addreview')
 @login_required
@@ -114,9 +115,10 @@ def createreview():
     artist = request.form['artist']
     release_title = request.form['release_title']
     art_filename = request.form['art_filename']
+    genres = request.form['genres']
     
     title= artist + ' - ' + release_title
-    review = Review(title=title, subtitle=subtitle, author=author, content=content, date_posted=datetime.now(), score=score, art_filename=art_filename, artist=artist, release_title=release_title, is_published=1)
+    review = Review(title=title, subtitle=subtitle, author=author, content=content, date_posted=datetime.now(), score=score, art_filename=art_filename, artist=artist, release_title=release_title, is_published=1, genres = genres)
 
     db.session.add(review)
     db.session.commit()
