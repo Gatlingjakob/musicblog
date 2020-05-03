@@ -139,9 +139,9 @@ def archive():
 
 @app.route('/musicreviews/<int:page>',methods=['GET'])
 def musicreviews(page=1):
-    per_page = 5
+    per_page = 1
     posts = Review.query.order_by(Review.date_posted.desc()).filter(Review.is_published==1).paginate(page,per_page,error_out=False)
-    return render_template('musicreviews.html',posts=posts)
+    return render_template('musicreviews.html',posts=posts, current_page = page)
 
 if __name__ == '__main__':
     app.run(debug=True)

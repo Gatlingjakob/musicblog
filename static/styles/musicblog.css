@@ -57,7 +57,8 @@
     text-align: center;
 }
 
-.older-posts-button{
+.pager{
+    margin: 0 auto;
     margin-bottom: 17px;
 }
 
@@ -68,3 +69,8 @@
 .review-genres{
     margin-bottom: 5px;
 }
+
+.page-button{
+    width: 120px;
+}
+

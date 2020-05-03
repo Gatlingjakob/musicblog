@@ -43,33 +43,41 @@
       </div>
       {% endfor %}
       <hr>
+<!-- <div class="pager">
+{% for page in posts.iter_pages(left_edge=1, right_edge =1, left_current=2, right_current=3) %}
 
-      <!-- {% for post in posts.items %}
-<div class="blogpost-preview">
-    <a href="{{ url_for('review', review_id=post.id) }}">
-      <h2 class="blogpost-title">
-        {{ post.title }}
-      </h2>
-      {% set name = 'images/' + post.art_filename|string %}
-          <img src="static/images/{{ post.art_filename }}" width="250" height="250" />
-      <h4 class="post-subtitle">
-        {{ post.subtitle }}
-      </h4>
-    </a>
-    {{post.content | safe}}
-    <p class="blogpost-author-date">Posted by {{ post.author }} on {{ post.date_posted.strftime('%B %d, %Y') }}</p>
-  </div>
-{% endfor %} -->
-{% if posts.has_prev %}<div class="clearfix">
-  <a class="btn btn-primary float-right older-posts-button" href="{{ url_for('musicreviews', page=posts.prev_num) }}">&larr; Newer Posts</a>
-</div>{% endif %}
-{% if posts.has_next %}<div class="clearfix">
-  <a class="btn btn-primary float-right older-posts-button" href="{{ url_for('musicreviews', page=posts.next_num) }}">Older Posts &rarr;</a>
-</div>{% endif %}
-      <!-- Pager -->
-      <!-- <div class="clearfix">
-        <a class="btn btn-primary float-right older-posts-button" href="#">Older Posts &rarr;</a>
-      </div> -->
+{% if page %}
+
+{% if page == current_page %}
+<a class="btn btn-primary older-posts-button" href="{{ url_for('musicreviews', page=page) }}"><u>{{ page }}</u></a>
+{% else %}
+
+<a class="btn btn-primary older-posts-button" href="{{ url_for('musicreviews', page=page) }}">{{ page }}</a>
+{% endif %}
+{% else  %}
+  ...
+{% endif %}
+
+{% endfor %}
+</div> -->
+
+<div class="pager">
+<a class="btn btn-primary page-button" href="{{ url_for('musicreviews', page=1) }}" style="border-radius: 10px;">Newest</a>
+{% if posts.has_prev %}
+  <a class="btn btn-primary page-button" href="{{ url_for('musicreviews', page=posts.prev_num) }}" style="border-radius: 10px; padding-left: 20px; margin-right: 60px;">Previous</a>
+{% else %}
+  <a class="btn btn-primary page-button" href="{{ url_for('musicreviews', page=posts.page) }}" style="border-radius: 10px; padding-left: 20px; margin-right: 60px;">Previous</a>
+{% endif %}
+page {{ current_page }} of {{posts.pages}}
+<a class="btn btn-primary page-button float-right" href="{{ url_for('musicreviews', page=posts.pages) }}" style="border-radius: 10px;">Oldest</a>
+
+{% if posts.has_next %}
+  <a class="btn btn-primary page-button float-right" href="{{ url_for('musicreviews', page=posts.next_num) }}" style="border-radius: 10px; margin-right: 5px;">Next</a>
+  {% else %}
+  <a class="btn btn-primary page-button float-right" href="{{ url_for('musicreviews', page=posts.page) }}" style="border-radius: 10px; margin-right: 5px;">Next</a>
+  {% endif %}
+</div>
+
     </div>
   </div>
 </div>
