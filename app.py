@@ -28,7 +28,7 @@ def load_user(user_id):
 
 @app.route('/login', methods=['POST'])
 def login():
-    user = User.query.filter_by(username='Gatlingjakob').first()
+    user = User.query.filter_by(username=config_values['USERNAME']).first()
 
     username = request.form['username']
     password = request.form['password']
@@ -46,7 +46,7 @@ def adminlogin():
 @app.route('/adminlogout')
 @login_required
 def adminlogout():
-    user = User.query.filter_by(username='Gatlingjakob').first()
+    user = User.query.filter_by(username=config_values['USERNAME']).first()
     logout_user()
     return redirect(url_for('index', page=1), code=302)
 
@@ -123,6 +123,14 @@ def createreview():
     db.session.add(review)
     db.session.commit()
     return redirect(url_for('musicreviews',page=1))
+
+@app.route('/updatereview/<int:review_id>')
+@login_required
+def updatereview(review_id):
+    review = db.session.query(Review).get(review_id)
+    review.content = "updated"
+    db.session.commit()
+    return redirect(url_for('review',review_id=review_id))    
 
 @app.route('/upload', methods=['GET', 'POST'])
 @login_required

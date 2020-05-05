@@ -44,11 +44,12 @@ class Review(db.Model):
     is_published = db.Column(db.Integer)
     genres = db.Column(db.String(500))
     # HIGH PRIO
-    # page numbers
+    # page numbers (logic done, just need full implementation and responsive design)
+    # API Token 
     # Read article link on cards and wordwrap
     # post-header background
     # Latest reviews on frontpage
-    # edit review/post
+    # edit review/post (logic done, just need full implementation)
     # searching and sorting (archive and maybe reviews+blog)
     
     # NICE TO HAVE
