@@ -3,6 +3,7 @@
     padding: 10px;
     margin-bottom: 30px;
     border-radius: 10px;
+    word-wrap: break-word;
 }
 
 .review-preview{
@@ -10,6 +11,7 @@
     padding: 10px;
     margin-bottom: 30px;
     border-radius: 10px;
+    word-wrap: break-word;
 }
 
 .blog-background{
@@ -74,3 +76,25 @@
     width: 120px;
 }
 
+.btn-older{
+    position: relative;
+    top: 28px;
+}
+
+.btn-newer{
+    position: relative;
+    top: -25px;
+}
+
+@media only screen and (max-width: 1230px) and (min-width: 401px) {
+    .page-button{
+        width: 90px;
+    }
+}
+
+@media only screen and (max-width: 400px) and (min-width: 1px) {
+    .page-button{
+        width: 10px;
+        font-size: xx-small;
+    }
+  }

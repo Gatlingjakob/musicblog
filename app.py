@@ -128,9 +128,40 @@ def createreview():
 @login_required
 def updatereview(review_id):
     review = db.session.query(Review).get(review_id)
-    review.content = "updated"
+    return render_template('updatereview.html', review=review)  
+
+@app.route('/updatereviewform/<int:review_id>')
+@login_required
+def updatereviewform(review_id):
+    review = db.session.query(Review).get(review_id)
+    
+    review.subtitle = request.form['subtitle']
+    review.author = request.form['author']
+    review.content = request.form['content']
+    review.score = request.form['score']
+    review.artist = request.form['artist']
+    review.release_title = request.form['release_title']
+    review.art_filename = request.form['art_filename']
+    review.genres = request.form['genres']
+    
+    return redirect(url_for('actuallyupdatereview',updatedreview=review))    
+
+@app.route('/actuallyupdatereview')
+@login_required
+def actuallyupdatereview(updatedreview):
+    review = db.session.query(Review).get(updatedreview.id)
+    
+    review.subtitle = updatedreview.subtitle
+    review.author = updatedreview.author
+    review.content = updatedreview.content
+    review.score = updatedreview.score
+    review.artist = updatedreview.artist
+    review.release_title = updatedreview.release_title
+    review.art_filename = updatedreview.art_filename
+    review.genres = updatedreview.genres
+    
     db.session.commit()
-    return redirect(url_for('review',review_id=review_id))    
+    return redirect(url_for('review',review_id=updatedreview.id)) 
 
 @app.route('/upload', methods=['GET', 'POST'])
 @login_required
@@ -140,6 +171,14 @@ def upload():
         return render_template('addreview.html', filename=filename)
     return render_template('addreview.html')
 
+@app.route('/updatereviewupload', methods=['GET', 'POST'])
+@login_required
+def updatereviewupload():
+    if request.method == 'POST' and 'photo' in request.files:
+        filename = photos.save(request.files['photo'])
+        return render_template('updatereview.html', filename=filename)
+    return render_template('updatereview.html')
+
 @app.route('/archive')
 def archive():
     reviews = Review.query.order_by(Review.date_posted.desc()).filter(Review.is_published==1).all()
@@ -147,7 +186,7 @@ def archive():
 
 @app.route('/musicreviews/<int:page>',methods=['GET'])
 def musicreviews(page=1):
-    per_page = 1
+    per_page = 5
     posts = Review.query.order_by(Review.date_posted.desc()).filter(Review.is_published==1).paginate(page,per_page,error_out=False)
     return render_template('musicreviews.html',posts=posts, current_page = page)
 

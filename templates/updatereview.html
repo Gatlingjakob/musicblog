@@ -1,0 +1,95 @@
+{% extends "adminbase.html" %}
+{% block title %}Index{% endblock %}
+{% block head %}
+    {{ super() }}
+{% endblock %}
+
+{% block content %}
+<!-- Page Header -->
+<header class="masthead" style="background-image: url(' {{ url_for('static', filename='images/blueprint.jpeg') }} ' )">
+  <div class="overlay"></div>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-md-10 mx-auto">
+        <div class="page-heading">
+          <h1>Update Review</h1>
+          <span class="subheading">Update review here</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- Main Content -->
+<div class="container">
+  <div class="row">
+    <div class="col-lg-8 col-md-10 mx-auto">
+      <form method=POST enctype=multipart/form-data action="{{ url_for('updatereviewupload') }}">
+        <input type=file name=photo>
+        <input type="submit">
+    </form>
+      <form name="addForm" id="addForm" method="POST" action="{{ url_for('updatereviewform', review_id=review.id) }}" novalidate>
+        <div class="control-group">
+          <div class="form-group col-xs-12 floating-label-form-group controls">
+            <label>Art Filename</label>
+            <input type="text" class="form-control" placeholder="Art Filename" name="art_filename" id="art_filename" value="{{review.art_filename}}" required data-validation-required-message="Name of the art file">
+            <p class="help-block text-danger"></p>
+          </div>
+        </div>
+        <div class="control-group">
+          <div class="form-group floating-label-form-group controls">
+            <label>Artist</label>
+            <input type="text" class="form-control" placeholder="Artist" name="artist" id="artist" value="{{review.artist}}" required data-validation-required-message="Please enter an artist name.">
+            <p class="help-block text-danger"></p>
+          </div>
+          <div class="form-group floating-label-form-group controls">
+            <label>Release Title</label>
+            <input type="text" class="form-control" placeholder="Release Title" name="release_title" id="release_title" value="{{review.release_title}}" required data-validation-required-message="Please enter a title.">
+            <p class="help-block text-danger"></p>
+          </div>
+        </div>
+        <div class="control-group">
+          <div class="form-group floating-label-form-group controls">
+            <label>Subtitle</label>
+            <input type="text" class="form-control" placeholder="Subtitle" name="subtitle" id="subtitle" value="{{review.subtitle}}" required data-validation-required-message="Please enter a subtitle.">
+            <p class="help-block text-danger"></p>
+          </div>
+        </div>
+        <div class="control-group">
+          <div class="form-group col-xs-12 floating-label-form-group controls">
+            <label>Author</label>
+            <input type="text" class="form-control" placeholder="Author" name="author" id="author" value="{{review.author}}" required data-validation-required-message="Please enter the name of the author">
+            <p class="help-block text-danger"></p>
+          </div>
+        </div>
+        <div class="control-group">
+          <div class="form-group col-xs-12 floating-label-form-group controls">
+            <label>Genre(s)</label>
+            <input type="text" class="form-control" placeholder="Genres" name="genres" id="genres" value="{{review.genres}}" required data-validation-required-message="Please enter the genre(s) of this release">
+            <p class="help-block text-danger"></p>
+          </div>
+        </div>
+        <div class="control-group">
+          <div class="form-group col-xs-12 floating-label-form-group controls">
+            <label>Score</label>
+            <input type="text" class="form-control" placeholder="Score" name="score" id="score" value="{{review.score}}" required data-validation-required-message="What would you rate it?">
+            <p class="help-block text-danger"></p>
+          </div>
+        </div>
+        <div class="control-group">
+          <div class="form-group floating-label-form-group controls">
+            <label>Review Content</label>
+            <textarea rows="5" class="form-control" placeholder="Blog Content" name="content" id="content" value="{{review.content}}" required data-validation-required-message="HTML Content goes here."></textarea>
+            <p class="help-block text-danger"></p>
+          </div>
+        </div>
+        <br>
+        <div id="success"></div>
+        <div class="form-group">
+          <button type="submit" class="btn btn-primary" id="sendMessageButton">Send</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock %}

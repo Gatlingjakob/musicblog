@@ -29,6 +29,7 @@ class Blogpost(db.Model):
     date_posted = db.Column(db.DateTime)
     content = db.Column(db.Text)
     is_published = db.Column(db.Integer)
+    updated_at = db.Column(db.DateTime)
 
 class Review(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -43,13 +44,16 @@ class Review(db.Model):
     art_filename = db.Column(db.String(500))
     is_published = db.Column(db.Integer)
     genres = db.Column(db.String(500))
+    updated_at = db.Column(db.DateTime)
+
     # HIGH PRIO
-    # page numbers (logic done, just need full implementation and responsive design)
+    # pythonanywhere - reupload project (maybe as new app) - DB has been imported to cloud SQL server
+    # page numbers absolute fixed position
+    # update form (page / form / update)
     # API Token 
     # Read article link on cards and wordwrap
     # post-header background
     # Latest reviews on frontpage
-    # edit review/post (logic done, just need full implementation)
     # searching and sorting (archive and maybe reviews+blog)
     
     # NICE TO HAVE

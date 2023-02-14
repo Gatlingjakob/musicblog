@@ -41,10 +41,10 @@
         <hr>
         <!-- Pager -->
         {% if posts.has_prev %}<div class="clearfix">
-          <a class="btn btn-primary float-right older-posts-button" href="{{ url_for('index', page=posts.prev_num) }}">&larr; Newer Posts</a>
+          <a class="btn btn-primary btn-older older-posts-button" href="{{ url_for('index', page=posts.prev_num) }}">&larr; Newer Posts</a>
         </div>{% endif %}
         {% if posts.has_next %}<div class="clearfix">
-          <a class="btn btn-primary float-right older-posts-button" href="{{ url_for('index', page=posts.next_num) }}">Older Posts &rarr;</a>
+          <a class="btn btn-primary btn-newer float-right older-posts-button" href="{{ url_for('index', page=posts.next_num) }}">Older Posts &rarr;</a>
         </div>{% endif %}
         <!-- <div class="clearfix">
           <a class="btn btn-primary float-right older-posts-button" href="#">Older Posts &rarr;</a>
