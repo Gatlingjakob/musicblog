@@ -60,6 +60,7 @@
 }
 
 .pager{
+    display: flex;
     margin: 0 auto;
     margin-bottom: 17px;
 }
@@ -84,6 +85,10 @@
 .btn-newer{
     position: relative;
     top: -25px;
+}
+
+.right{
+    float: right;
 }
 
 @media only screen and (max-width: 1230px) and (min-width: 401px) {
