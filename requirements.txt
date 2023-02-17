@@ -9,7 +9,7 @@ bdist-mpkg==0.5.0
 beautifulsoup4==4.9.1
 blinker==1.4
 bonjour-py==0.3
-certifi==2020.4.5.2
+certifi==2022.12.7
 cffi==1.12.2
 chardet==3.0.4
 click==7.1.1
